@@ -1,0 +1,823 @@
+:root {
+        --bg: #f7fbfd;
+        --bg-soft:#eef6fa;
+        --text:#0d1c23;
+        --muted:#3d5e69;
+        --brand:#0fb5c9;      /* teal */
+        --brand-2:#1570ff;    /* azure */
+        --brand-3:#10d19a;    /* aqua-green */
+        --ring:color-mix(in oklab,var(--brand) 55%, transparent);
+        --grad-brand:linear-gradient(90deg,var(--brand) 0%, var(--brand-2) 55%, var(--brand-3) 100%);
+        --grad-brand-soft:linear-gradient(120deg,
+            color-mix(in oklab,var(--brand) 25%, transparent),
+            color-mix(in oklab,var(--brand-2) 18%, transparent) 60%,
+            color-mix(in oklab,var(--brand-3) 22%, transparent) 100%);
+    }
+    .dark{
+      --bg: #0b1411;
+      --bg-soft: #0f1c17;
+      --text: #e9f6f1;
+      --muted:#3d5e69;
+        --brand:#0fb5c9;      /* teal */
+        --brand-2:#1570ff;    /* azure */
+        --brand-3:#10d19a;
+      --card: #0f1a16;
+      --ring: rgba(106,219,191,0.35);
+      --shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .container{width:min(1100px, 92%); margin-inline:auto}
+    /* Header */
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(120%) blur(8px); background:color-mix(in oklab, var(--bg) 86%, transparent); border-bottom:1px solid color-mix(in oklab, var(--text) 12%, transparent)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.4px}
+    .logo{width:36px; height:36px; border-radius:14px; background: radial-gradient(80% 80% at 30% 20%, var(--brand), var(--brand-2)); display:grid; place-items:center; box-shadow:var(--shadow)}
+    .logo span{font-weight:900}
+    .nav a{font-weight:600; text-decoration:none}
+    .links{display:flex; gap:22px; align-items:center}
+    .links a{opacity:.85}
+    .links a.active{opacity:1; position:relative}
+    .links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-8px; height:2px; background:linear-gradient(90deg, var(--brand), var(--brand-2)); border-radius:2px}
+    .nav-cta{display:flex; align-items:center; gap:10px}
+    .btn, button.btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; background:var(--text); color:var(--bg); border-radius:12px; border:1px solid color-mix(in oklab, var(--text) 22%, transparent); box-shadow:var(--shadow); text-decoration:none; font-weight:700}
+    .btn.outline{background:transparent; color:var(--text); border:1.5px solid color-mix(in oklab, var(--text) 22%, transparent)}
+    .icon{width:18px; height:18px}
+    .theme{display:inline-grid; place-items:center; width:40px; height:40px; border-radius:12px; background:var(--card); border:1px solid color-mix(in oklab, var(--text) 12%, transparent)}
+    .menu-btn{display:none}
+    /* Hero */
+    .hero{position:relative; overflow:hidden; padding:32px 0 48px}
+    .hero .container{display:grid; grid-template-columns: 1.3fr .9fr; gap:40px; align-items:center; padding:0}
+    .hello{display:inline-block; font-weight:800; letter-spacing:.3px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    h1{font-size: clamp(34px, 4.6vw, 56px); line-height:1.1; margin:10px 0 12px}
+    .lead{font-size: clamp(16px, 1.6vw, 20px); color:var(--muted); max-width:60ch}
+    .hero-cta{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
+    /* Avatar / Blob */
+    .avatar-wrap{position:relative; display:grid; place-items:center}
+    .blob{position:absolute; width:360px; height:360px; filter: blur(24px); opacity:.6; z-index:-1;
+      background:radial-gradient(60% 60% at 40% 40%, var(--brand), transparent),
+                 radial-gradient(60% 60% at 70% 60%, var(--brand-2), transparent);
+      border-radius:50%; animation: float 10s ease-in-out infinite alternate;
+    }
+    @keyframes float{to{transform: translateY(-14px) scale(1.02) rotate(3deg)}}
+    .avatar{
+      width: 350px; /* bigger than 220px */
+      height: 350px;
+      border-radius:28px;
+      background:var(--card);
+      border:1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .avatar svg{width:100%; height:100%}
+    section{padding:68px 0}
+    .section-title{font-size: clamp(22px, 2.6vw, 30px); margin:0 0 22px}
+    .muted{color:var(--muted)}
+    /* Cards */
+    .grid{display:grid; gap:16px}
+    .grid.cols-3{grid-template-columns: repeat(3, minmax(0,1fr))}
+    .grid.cols-2{grid-template-columns: repeat(2, minmax(0,1fr))}
+    .card{background:var(--card); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius:18px; padding:18px; box-shadow:var(--shadow); transition: transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform: translateY(-4px); box-shadow: 0 18px 40px color-mix(in oklab, var(--text) 12%, transparent)}
+    .card h3{margin:6px 0 8px; font-size:20px}
+    .card p{margin:0}
+    .badge{display:inline-flex; gap:8px; align-items:center; font-size:12px; padding:6px 10px; border-radius:999px; background:color-mix(in oklab, var(--brand) 35%, var(--card)); border:1px solid color-mix(in oklab, var(--brand) 60%, transparent); font-weight:700}
+    .pills{display:flex; flex-wrap:wrap; gap:8px}
+    /* Timeline */
+    .timeline{position:relative; margin-top:8px}
+    .timeline::before{content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(var(--brand), transparent)}
+    .item{position:relative; margin-left:28px; padding-left:16px}
+    .item::before{content:""; position:absolute; left:-4px; top:8px; width:12px; height:12px; background:var(--brand); border-radius:50%; box-shadow:0 0 0 4px color-mix(in oklab, var(--brand) 30%, transparent)}
+    /* Footer */
+    footer{padding:40px 0 60px; color:var(--muted)}
+    .footer {
+      background: linear-gradient(90deg, var(--bg-soft) 70%, var(--brand-2) 100%);
+      color: var(--muted);
+      padding: 48px 0 24px 0;
+      margin-top: 60px;
+      border-top: 2px solid color-mix(in oklab, var(--brand) 30%, transparent);
+      font-size: 1.08em;
+    }
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+    }
+    .footer-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2em;
+    }
+    .footer-name {
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+    .footer-role {
+      font-size: 0.98em;
+      color: var(--muted);
+      margin-left: 10px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .footer-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      opacity: 0.85;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--brand);
+      opacity: 1;
+    }
+    .footer-social {
+      display: flex;
+      gap: 18px;
+      margin-top: 8px;
+    }
+    .footer-social a {
+      color: var(--muted);
+      background: var(--card);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 2px 8px rgba(139,225,199,0.08);
+      transition: background 0.2s, color 0.2s;
+      border: 1.5px solid color-mix(in oklab, var(--brand) 18%, transparent);
+    }
+    .footer-social a:hover {
+      background: var(--brand);
+      color: var(--text);
+    }
+    .footer-contact {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 1em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .footer-contact a {
+      color: var(--text);
+      text-decoration: underline dotted;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover {
+      color: var(--brand);
+    }
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.98em;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .footer-built {
+      font-size: 0.97em;
+      color: var(--brand);
+    }
+    @media (max-width: 700px) {
+      .footer-content { gap: 22px; }
+      .footer-contact { flex-direction: column; gap: 10px; }
+      .footer-main { gap: 10px; }
+      .footer-links { gap: 10px; }
+      .footer-social { gap: 10px; }
+    }
+    footer#contact{scroll-margin-top:90px;}
+    /* Compensate for sticky header when jumping to hero */
+    #home{
+  scroll-margin-top:var(--header-offset);
+}
+
+/* (If some other links still point to #top keep this as safety) */
+#top{
+  scroll-margin-top:var(--header-offset);
+}
+    /* Utilities */
+    .sr{opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease}
+    .sr.show{opacity:1; transform:none}
+    .split{display:flex; flex-wrap:wrap; gap:12px}
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero .container{grid-template-columns: 1fr; padding:30px 0}
+      .avatar{width:240px; height:240px} /* was 180px */
+      .grid.cols-3{grid-template-columns: 1fr 1fr}
+      .grid.cols-2{grid-template-columns: 1fr}
+    }
+    @media (max-width: 720px){
+      .links{display:none}
+      .menu-btn{display:inline-grid; place-items:center}
+      nav.open .links{display:flex; position:absolute; left:0; right:0; top:64px; flex-direction:column; gap:12px; background:var(--bg); padding:12px; border-bottom:1px solid color-mix(in oklab, var(--text) 12%, transparent)}
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
+    }
+    .avatar video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* keeps proportions and crops if needed */
+      border-radius: 30px; /* match the .avatar style */
+      display: block;
+    }
+    .card a.btn.outline {
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+    }
+    .card .pills {
+      margin-top: 16px; /* add space above the badges */
+    }
+    /* Carousel container */
+    .carousel {
+      position: relative;
+      margin-top: 16px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      box-shadow: var(--shadow);
+      width: 100%;
+      aspect-ratio: 16/9; /* slightly wider/taller frame to show images bigger */
+      max-height: 520px; /* cap height on large screens */
+    }
+    /* Keep carousel white in dark mode */
+    .dark .carousel {
+      background: #ffffff !important;
+      border: 1px solid rgba(0,0,0,0.06) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12) !important;
+    }
+    /* Track + slides */
+    .carousel-track { position: relative; width: 100%; height: 100%; }
+    .carousel .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px; /* smaller padding to free more room for image */
+      box-sizing: border-box;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s;
+    }
+    .carousel .slide.active { opacity: 1; visibility: visible; }
+    /* make the image larger but preserve aspect ratio */
+    .carousel img {
+      max-width: 96%; /* increase from 90% */
+      max-height: 92%; /* increase from 90% */
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: auto;
+      transition: transform 220ms ease;
+    }
+    /* subtle scale on active slide for perceived size */
+    .carousel .slide.active img { transform: scale(1.03); }
+    /* Prev/Next buttons */
+    .car-btn{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border: 1px solid color-mix(in oklab, var(--text) 15%, transparent);
+      backdrop-filter: blur(6px);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      z-index: 2;
+    }
+    .car-btn.prev{ left: 16px; }
+    .car-btn.next{ right: 16px; }
+    /* Ensure controls remain visible on the white carousel */
+    .dark .car-btn {
+      background: rgba(255,255,255,0.9) !important;
+      color: #0e1a16 !important;
+    }
+    /* Dots */
+    .carousel .dots{
+      position: absolute; left: 0; right:0; bottom: 16px;
+      display:flex; justify-content:center; gap:8px; z-index: 2; /* Ensure dots are above images */
+    }
+    .carousel .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: color-mix(in oklab, var(--text) 20%, transparent);
+      opacity: .6;
+    }
+    .carousel .dot.active{ opacity:1; background: var(--brand); }
+    .dark .carousel .dots .dot { background: rgba(0,0,0,0.18); }
+    .dark .carousel .dot.active { background: var(--brand); }
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .carousel-track{ transition:none !important; }
+    }
+    /* Fullscreen modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 1000; cursor: pointer; }
+    .modal img { max-width: 90%; max-height: 90vh; margin: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 8px; object-fit: contain; }
+    .modal-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 1001; }
+    /* Education logo: fixed frame, keep full logo visible */
+    .education-logo {
+      width: 84px;
+      height: 56px;
+      object-fit: contain; /* show whole logo without cropping */
+      background: color-mix(in oklab, var(--card) 88%, transparent);
+      padding: 6px; /* small inner margin so logos don't touch edges */
+      border-radius: 8px;
+      border: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+      display: block;
+    }
+        /* Optional: ensure consistent alignment for the left column */
+        .education-entry { display:flex; gap:12px; align-items:center; }
+        .certs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    }
+    .cert-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-decoration: none;
+    transition: box-shadow 0.18s, background 0.18s;
+    box-shadow: 0 2px 10px rgba(2,16,12,0.06);
+    border: 1px solid color-mix(in oklab, var(--brand) 10%, transparent);
+    }
+    .cert-row:hover {
+    background: var(--brand);
+    box-shadow: 0 8px 24px color-mix(in oklab, var(--brand) 18%, transparent);
+    }
+    .cert-title {
+    font-size: 1.08em;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    }
+    .cert-link {
+    font-size: 0.98em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-left: 18px;
+    white-space: nowrap;
+    }
+    @media (max-width: 900px) {
+    .cert-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .cert-link { margin-left: 0; }
+    }
+    .timeline .item {
+    margin-bottom: 20px; /* increase gap between cases */
+  }
+  .timeline .item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Give each timeline card a bit more internal padding for visual breathing room */
+  .timeline .item .card {
+    padding: 20px;
+  }
+
+  /* Ensure certification rows keep comfortable spacing */
+  .certs-list { gap: 18px; }
+  .cert-row { margin-bottom: 6px; }
+  .cert-row:last-child { margin-bottom: 0; }
+  /* Activities (photo album) */
+.album{
+  --min: 180px;
+  margin-top:20px;
+  display:grid;
+  gap:16px;
+  grid-template-columns: repeat(auto-fill,minmax(var(--min),1fr));
+}
+.album-item{
+  position:relative;
+  background:var(--card);
+  border:1px solid color-mix(in oklab, var(--text) 12%, transparent);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+.album-item img{
+  width:100%;
+  height:100%;
+  aspect-ratio: 4/3;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s ease;
+}
+.album-item:hover img{transform:scale(1.05);}
+.album-item figcaption{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:8px 10px;
+  font-size:13px;
+  font-weight:600;
+  background:linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+  color:#fff;
+  letter-spacing:.3px;
+}
+.dark .album-item{border:1px solid color-mix(in oklab, var(--text) 22%, transparent);}
+@media (max-width:600px){
+  .album{--min:140px; gap:12px;}
+  .album-item figcaption{font-size:12px;}
+}
+.about-card{
+  position:relative;
+  overflow:hidden;
+  padding:32px 38px 40px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  background:
+    radial-gradient(140% 90% at 0% 0%, color-mix(in oklab,var(--brand) 22%, transparent), transparent 70%),
+    radial-gradient(120% 80% at 100% 100%, color-mix(in oklab,var(--brand-2) 25%, transparent), transparent 70%),
+    var(--card);
+}
+.dark .about-card{
+  background:
+    radial-gradient(140% 90% at 0% 0%, color-mix(in oklab,var(--brand) 24%, transparent), transparent 70%),
+    radial-gradient(120% 80% at 100% 100%, color-mix(in oklab,var(--brand-2) 28%, transparent), transparent 70%),
+    var(--card);
+}
+.about-top{
+  display:flex;
+  flex-wrap:wrap;
+  gap:28px;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid color-mix(in oklab,var(--text) 10%, transparent);
+  padding-bottom:16px;
+}
+.about-location{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-weight:600;
+  background:color-mix(in oklab,var(--brand) 45%, var(--card));
+  color:var(--text);
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:14px;
+  border:1px solid color-mix(in oklab,var(--brand) 65%, transparent);
+  box-shadow:0 2px 4px rgba(0,0,0,.04);
+}
+.dark .about-location{
+  background:color-mix(in oklab,var(--brand) 55%, var(--card));
+}
+.about-stats{
+  display:grid;
+  grid-auto-flow:column;
+  gap:28px;
+  font-size:13px;
+}
+.about-stats > div{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:90px;
+  position:relative;
+  padding-left:10px;
+}
+.about-stats > div::before{
+  content:"";
+  position:absolute;
+  left:0; top:6px;
+  width:4px; height:calc(100% - 12px);
+  border-radius:2px;
+  background:linear-gradient(var(--brand), var(--brand-2));
+  opacity:.75;
+}
+.about-stats strong{
+  font-size:20px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+.about-body{
+  columns:2 380px;
+  column-gap:46px;
+}
+.about-body p{
+  break-inside:avoid;
+  margin:0 0 18px;
+}
+.about-lead{
+  font-size: clamp(18px, 1.3vw + 14px, 22px);
+  font-weight:600;
+  line-height:1.4;
+}
+.hl{
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  font-weight:700;
+}
+@media (max-width:820px){
+  .about-body{columns:1;}
+  .about-card{padding:30px 26px 34px;}
+  .about-stats{grid-auto-flow:row; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:16px 24px;}
+  .about-top{align-items:flex-start;}
+}
+/* Add to styles.css */
+.copy-tip.copied {
+  color: #2ecc40;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.talk-section{
+  margin-top:10px;
+  background:
+    linear-gradient(140deg, color-mix(in oklab,var(--brand) 16%, transparent), transparent 70%),
+    linear-gradient(320deg, color-mix(in oklab,var(--brand-2) 18%, transparent), transparent 65%);
+  padding:60px 32px 70px;
+  border:1px solid color-mix(in oklab,var(--text) 10%, transparent);
+  border-radius:34px;
+  box-shadow:0 14px 42px -10px color-mix(in oklab,var(--text) 14%, transparent);
+  position:relative;
+  overflow:hidden;
+}
+.dark .talk-section{
+  box-shadow:0 18px 46px -12px rgba(0,0,0,.55);
+}
+.talk-section::after{
+  content:"";
+  position:absolute;
+  top:-120px; right:-120px;
+  width:280px; height:280px;
+  background:radial-gradient(circle at 30% 30%, var(--brand-2), transparent 70%);
+  filter:blur(40px); opacity:.55; pointer-events:none;
+}
+.talk-intro{max-width:560px; margin-bottom:26px;}
+.talk-form{
+  display:grid;
+  gap:22px;
+  max-width:820px;
+}
+.talk-form .hp{display:none !important;}
+.field{display:flex; flex-direction:column; gap:6px;}
+.field label{font-weight:700; letter-spacing:.3px; font-size:15px;}
+.field input,
+.field textarea{
+  font:inherit;
+  background:var(--bg-soft);
+  border:1.5px solid color-mix(in oklab,var(--text) 14%, transparent);
+  padding:14px 16px;
+  border-radius:14px;
+  resize:vertical;
+  transition:border-color .2s, background .2s, box-shadow .25s;
+  box-shadow:0 2px 6px rgba(2,16,12,0.04) inset;
+}
+.field input:focus-visible,
+.field textarea:focus-visible{
+  outline:none;
+  border-color:var(--brand);
+  box-shadow:0 0 0 3px var(--ring);
+  background:var(--card);
+}
+.dark .field input,
+.dark .field textarea{
+  background:color-mix(in oklab,var(--card) 92%, transparent);
+  box-shadow:none;
+}
+.field textarea{min-height:160px;}
+.err{
+  margin:0;
+  font-size:12px;
+  font-weight:600;
+  color:#d93025;
+  min-height:14px;
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:4px;
+  align-items:center;
+}
+.talk-submit{
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  color:var(--text);
+  border:none;
+  box-shadow:0 8px 24px color-mix(in oklab,var(--brand) 50%, transparent);
+  letter-spacing:.5px;
+}
+.talk-submit:hover{filter:brightness(1.05);}
+.talk-reset{font-weight:600;}
+.form-status{
+  margin-top:4px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--muted);
+  min-height:20px;
+}
+.form-status.ok{color:color-mix(in oklab,var(--brand) 70%, var(--text));}
+.form-status.err{color:#d93025;}
+@media (max-width:760px){
+  .talk-section{padding:52px 22px 60px; border-radius:26px;}
+}
+.img-modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(14,26,22,.9);
+  backdrop-filter:blur(4px);
+  z-index:1200;
+  padding:2rem clamp(1rem,4vw,3rem);
+}
+.img-modal.open{display:flex; animation:fadeIn .25s;}
+.img-modal img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  border-radius:18px;
+  box-shadow:0 30px 70px -15px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06);
+  animation:scaleIn .25s;
+}
+.modal-close,
+.modal-nav{
+  position:absolute;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-size:30px;
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  backdrop-filter:blur(6px);
+  line-height:1;
+  transition:background .2s, transform .2s;
+}
+.modal-close{top:18px; right:18px; font-size:40px;}
+.modal-nav.prev{left:24px;}
+.modal-nav.next{right:24px;}
+.modal-nav:hover,
+.modal-close:hover{background:rgba(255,255,255,.25);}
+.modal-nav:active,
+.modal-close:active{transform:scale(.92);}
+@media (max-width:700px){
+  .modal-nav.prev{left:6px;}
+  .modal-nav.next{right:6px;}
+  .modal-close{top:10px; right:10px;}
+  .modal-close,.modal-nav{width:46px; height:46px; font-size:28px;}
+}
+@keyframes fadeIn{from{opacity:0} to{opacity:1}}
+@keyframes scaleIn{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
+
+/* Footer dark-mode text to pure white */
+.dark .footer {
+  color:#fff;
+}
+.dark .footer .footer-name,
+.dark .footer .footer-role,
+.dark .footer .footer-links a,
+.dark .footer .footer-contact,
+.dark .footer .footer-contact a,
+.dark .footer .footer-bottom,
+.dark .footer .footer-built {
+  color:#fff;
+  opacity:1;
+}
+.dark .footer .footer-links a:hover,
+.dark .footer .footer-contact a:hover { color: var(--brand-2); }
+
+/* Social icons */
+.dark .footer-social a {
+  color:#fff;
+  background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(255,255,255,0.25);
+}
+.dark .footer-social a:hover{
+  background:var(--brand-2);
+  color:#0d1c23;
+}
+
+/* Ensure any muted elements inside footer become white */
+.dark .footer .muted {
+  color: #fff;
+}
+
+
+
+/* === Branded Shadow System (Blue-Green) === */
+:root {
+  --shadow-brand-sm:
+    0 2px 6px -2px color-mix(in oklab,var(--brand) 40%, transparent),
+    0 4px 14px -4px color-mix(in oklab,var(--brand-2) 32%, transparent);
+  --shadow-brand-md:
+    0 4px 18px -6px color-mix(in oklab,var(--brand) 42%, transparent),
+    0 10px 34px -10px color-mix(in oklab,var(--brand-2) 38%, transparent),
+    0 0 0 1px color-mix(in oklab,var(--brand) 55%, transparent);
+  --shadow-brand-lg:
+    0 8px 26px -8px color-mix(in oklab,var(--brand) 50%, transparent),
+    0 18px 60px -14px color-mix(in oklab,var(--brand-2) 45%, transparent),
+    0 0 0 1.5px color-mix(in oklab,var(--brand) 65%, transparent);
+}
+
+.dark {
+  --shadow-brand-sm:
+    0 2px 8px -2px color-mix(in oklab,var(--brand) 55%, transparent),
+    0 6px 18px -6px color-mix(in oklab,var(--brand-2) 50%, transparent),
+    0 0 0 1px rgba(255,255,255,0.06);
+  --shadow-brand-md:
+    0 4px 22px -6px color-mix(in oklab,var(--brand) 60%, transparent),
+    0 12px 42px -10px color-mix(in oklab,var(--brand-2) 55%, transparent),
+    0 0 0 1px rgba(255,255,255,0.07);
+  --shadow-brand-lg:
+    0 10px 34px -10px color-mix(in oklab,var(--brand) 62%, transparent),
+    0 22px 70px -18px color-mix(in oklab,var(--brand-2) 60%, transparent),
+    0 0 0 2px rgba(255,255,255,0.08);
+}
+
+/* Apply branded shadows */
+.card,
+.skills-card,
+.about-card,
+.album-item,
+.cert-row,
+.talk-section,
+.avatar,
+.skills-wrapper,
+.education-entry .card {
+  box-shadow: var(--shadow-brand-md) !important;
+}
+
+/* Larger emphasis variants (adjust selectors if needed) */
+.hero .avatar,
+.talk-section.emphasis,
+.about-card.emphasis {
+  box-shadow: var(--shadow-brand-lg) !important;
+}
+
+/* Smaller / subtle (e.g., pills if you want) */
+.badge,
+.pills .pill,
+.footer-social a {
+  box-shadow: var(--shadow-brand-sm);
+}
+
+/* Hover elevation */
+.card:hover,
+.album-item:hover,
+.cert-row:hover,
+.about-card:hover {
+  box-shadow: var(--shadow-brand-lg) !important;
+  transform: translateY(-3px);
+}
+@media (prefers-reduced-motion: reduce){
+  .card:hover,
+  .album-item:hover,
+  .cert-row:hover,
+  .about-card:hover { transform:none; }
+}
+/* Softer certification row colors */
+.cert-row{
+  background:color-mix(in oklab,var(--brand) 12%, var(--bg-soft));
+  border:1px solid color-mix(in oklab,var(--brand) 40%, transparent);
+  box-shadow:0 2px 10px color-mix(in oklab,var(--brand) 18%, transparent);
+}
+.cert-row:hover{
+  background:color-mix(in oklab,var(--brand) 26%, var(--bg-soft));
+  box-shadow:0 6px 22px -4px color-mix(in oklab,var(--brand-2) 30%, transparent);
+}
+.dark .cert-row{
+  background:color-mix(in oklab,var(--brand) 18%, var(--card));
+  border:1px solid color-mix(in oklab,var(--brand) 45%, transparent);
+}
+.dark .cert-row:hover{
+  background:color-mix(in oklab,var(--brand) 32%, var(--card));
+}
